@@ -19,23 +19,31 @@ public class PrintOnlyDuplicatesOptions {
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		driver.get("http://127.0.0.1:5500/dropdown.html");
-		List<WebElement> players = driver.findElements(By.xpath("//select[@id='player']/option"));
-		List<String> playerLiist=new ArrayList<String>();
-		for(WebElement player:players) {
-			String text = player.getText();
-			playerLiist.add(text);
-		}
-		Set<String> playerSet=new HashSet<String>();
-		Set<String> duplicatPlayer=new HashSet<String>();
-		for(String player:playerLiist) {
-			if(!playerSet.add(player)) {
-				duplicatPlayer.add(player);
-			}
-		}
-		System.out.println("Duplicateas Player are :   ");
-		for(String player:duplicatPlayer) {
-			System.out.println(player);
-		}
+		WebElement player = driver.findElement(By.xpath("//select[@id='player']"));
+    Select s=new Select(player);
+    List<WebElement> players = s.getOptions();
+     Set<String> playerSet=new HashSet<String>();
+    for(WebElement player1:players) {
+      String text = player1.getText();
+      playerSet.add(text);
+    }
+    System.out.println("Unquie Player Name in Dropdown Options:");
+    for(String player1:playerSet) {
+      System.out.println(player1);
+    }
+    
+     WebElement team1 = driver.findElement(By.xpath("//select[@id='team']"));
+    Select s1 = new Select(team1);
+     List<WebElement> teams = s1.getOptions();
+    Set<String> teamSet=new HashSet<String>();
+    for(WebElement team:teams) {
+      String text = team.getText();
+      teamSet.add(text);
+    }
+    System.out.println("Unique Team Name in DropDown Options :");
+    for(String team:teamSet) {
+      System.out.println(team);
+    }
 		driver.quit();
 		System.out.println("Pass");
 
