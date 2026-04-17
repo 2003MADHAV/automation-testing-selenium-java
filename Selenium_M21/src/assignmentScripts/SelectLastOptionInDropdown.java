@@ -23,7 +23,7 @@ public class SelectLastOptionInDropdown {
 		System.out.println(players.get(players.size()-1).getText());
 		
 		//----------------------------------------------------------------------------//
-		
+	/*	
 		System.out.println("Team Count in Options : "+teams.size());
 		for(WebElement team:teams) {
 			System.out.println(team.getText());
@@ -32,7 +32,7 @@ public class SelectLastOptionInDropdown {
 		for(WebElement player:players) {
 			System.out.println(player.getText());
 		}
-		
+	*/	
 		driver.quit();
 		System.out.println("Pass");
 	}
