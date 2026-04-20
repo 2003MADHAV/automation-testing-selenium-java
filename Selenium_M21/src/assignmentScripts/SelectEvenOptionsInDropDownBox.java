@@ -28,7 +28,21 @@ public class SelectEvenOptionsInDropDownBox {
 		for(WebElement selected : select.getAllSelectedOptions()) {
 		    System.out.println(selected.getText());
 		}
-
+	// Team DropDown --------------------------------------------
+	/*
+		WebElement team = driver.findElement(By.xpath("//select[@id='team']"));
+		Select s=new Select(team);
+		List<WebElement> teams = s.getOptions();
+		for(int i=0;i<teams.size();i++) {
+			if(i%2==0) {
+				s.selectByIndex(i);
+			}
+		}
+		System.out.println("Even-indexed Team selected:");
+		for(WebElement selected : s.getAllSelectedOptions()) {
+		    System.out.println(selected.getText());
+		}
+		*/
 		driver.quit();
 		System.out.println("Pass");
 	}

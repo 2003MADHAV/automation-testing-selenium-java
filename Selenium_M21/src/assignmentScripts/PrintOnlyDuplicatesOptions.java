@@ -47,7 +47,5 @@ public class PrintOnlyDuplicatesOptions {
     }
 		driver.quit();
 		System.out.println("Pass");
-
 	}
-
 }
