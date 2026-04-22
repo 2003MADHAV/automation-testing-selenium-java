@@ -22,8 +22,7 @@ public class HandlePopupsAlertwithTextbox {
 		String text = driver.findElement(By.xpath("//p[@id='demo1']")).getText();
 		System.out.println(text);
 		driver.quit();
-		
-
+	
 	}
 
 }
