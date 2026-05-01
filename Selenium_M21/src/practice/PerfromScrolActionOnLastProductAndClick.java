@@ -1,9 +1,8 @@
 package practice;
 
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Set;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -26,29 +25,18 @@ public class PerfromScrolActionOnLastProductAndClick {
 		 WebElement sneakers=driver.findElement(By.xpath("//a[text()='Sneakers']"));
 		 action.click(sneakers).perform();
 		WebElement rightPointer = driver.findElement(By.xpath("//*[@id='rootRailThumbRight']"));
-		action.clickAndHold(rightPointer).moveByOffset(-90, 0).build().perform();
+		action.clickAndHold(rightPointer).moveByOffset(-100, 0).build().perform();
 		action.release(rightPointer).perform();
-		Thread.sleep(2000);
-				 
-		 List<WebElement> procuctLists = driver.findElements(By.xpath("//ul[@class='results-base']/child::li"));
-		 List<WebElement> visibileProdList=new ArrayList<WebElement>();
-		 for(WebElement product:procuctLists) {
-			 if(product.isDisplayed()) {
-				 visibileProdList.add(product);
-			 }
-		 }
-		 WebElement lastProduct = visibileProdList.get(visibileProdList.size()-1);
+		Thread.sleep(2000);		 
+		 List<WebElement> procuctLists = driver.findElements(By
+		.xpath("//li[@class='product-base'][not(descendant::div[@class='product-waterMark'])]"));
+		 WebElement lastProduct = procuctLists.get(procuctLists.size()-1);
 		 action.scrollToElement(lastProduct).perform();
 		 Thread.sleep(5000);
 		 action.click(lastProduct).perform();
-		 action.release(lastProduct).perform();
-		
-		 
-	/* 
 		Set<String> ids = driver.getWindowHandles();
-		Iterator<String> it= ids.iterator();
-		while(it.hasNext()) {
-			driver.switchTo().window(it.next());
+		for(String id:ids) {
+			driver.switchTo().window(id);
 		}
 		driver.findElement(By.xpath("//input[@class='pincode-code']")).sendKeys("848132");
 		Thread.sleep(2000);
@@ -57,9 +45,7 @@ public class PerfromScrolActionOnLastProductAndClick {
 		WebElement text = driver.findElement(By.xpath("(//h4[@class='pincode-serviceabilityTitle'])[1]"));
 		System.out.println(text.getText());
 		
-	//	driver.quit();
-		System.out.println("passs");
-	*/	
+		driver.quit();
+		System.out.println("passs");	
 	}
-
 }

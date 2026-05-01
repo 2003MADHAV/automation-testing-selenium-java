@@ -2,6 +2,7 @@ package handling_mouse_actions;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -22,12 +23,12 @@ public class AssignmentDragAndDropInDemoQspider {
 		driver.findElement(By.xpath("//*[text()='Drag & Drop']")).click();
 		driver.findElement(By.xpath("//*[text()='Drag Position']")).click();
 		Thread.sleep(2000);
-/*		
+		
 		WebElement mobileCharger = driver.findElement(By.xpath("//*[text()='Mobile Charger']"));
 		WebElement mobileCover = driver.findElement(By.xpath("//*[text()='Mobile Cover']"));
-		WebElement laptioCharger = driver.findElement(By.xpath("//*[text()='Laptop Charger']"));
+		WebElement laptiopCharger = driver.findElement(By.xpath("//*[text()='Laptop Charger']"));
 		WebElement laptopCover = driver.findElement(By.xpath("//*[text()='Laptop Cover']"));	
-*/
+
 		WebElement mobileDroplaeArea = driver.findElement(By.xpath("//*[text()='Mobile Accessories']"));
 		WebElement laptopDropableArea = driver.findElement(By.xpath("//*[text()='Laptop Accessories']"));
 		Actions action=new Actions(driver);
@@ -41,7 +42,8 @@ public class AssignmentDragAndDropInDemoQspider {
 		Thread.sleep(2000);
 		action.dragAndDrop(laptopCover, laptopDropableArea).perform();
 */	
-		//Approach ---> 1
+		//Approach ---> 2
+/*		
 		List<WebElement> dropableEleList = driver.findElements(By.xpath("//*[text()='Mobile Charger']/parent::div/child::div"));
 		for(int i=0;i<dropableEleList.size();i++) {
 			 String itemText = dropableEleList.get(i).getText();
@@ -52,6 +54,29 @@ public class AssignmentDragAndDropInDemoQspider {
 				action.dragAndDrop(dropableEleList.get(i), laptopDropableArea).perform();
 			}	
 		}	
-
+*/
+		//Approach --->3
+		List<WebElement> dropableItems=Arrays.asList(mobileCharger,mobileCover,laptiopCharger,laptopCover);
+		List<WebElement> dropAreas=Arrays.asList(mobileDroplaeArea,laptopDropableArea);
+		for(WebElement dropableItem:dropableItems) {
+			
+			String itemText=dropableItem.getText();
+			
+			for(WebElement dropArea :dropAreas) {
+				
+				String dropableItemText = dropArea.getText();
+				
+				if(itemText.contains("Mobile") && dropableItemText.contains("Mobile")) {
+					action.dragAndDrop(dropableItem, dropArea).perform();
+				}
+				else if(itemText.contains("Laptop") && dropableItemText.contains("Laptop")) {
+					action.dragAndDrop(dropableItem, dropArea).perform();
+				}
+			}
+		}
+		
+		Thread.sleep(3000);
+		driver.quit();
+		System.out.println("passs");
 	}
 }	
